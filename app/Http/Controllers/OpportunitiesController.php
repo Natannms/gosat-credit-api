@@ -31,7 +31,7 @@ class OpportunitiesController extends Controller
         return  $body;
 
     }
-    public function getOferta(Request $request)
+    public function getOffer(Request $request)
     {
         $url = "https://dev.gosat.org/api/v1/simulacao/oferta";
         $client = new Client();
