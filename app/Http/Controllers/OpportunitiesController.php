@@ -31,8 +31,8 @@ class OpportunitiesController extends Controller
         return  $body;
 
     }
-    public function getOffer(Request $request)
-    {
+
+    public function getOneOffer($cpf, $instituicao_id, $codModalidade){
         $url = "https://dev.gosat.org/api/v1/simulacao/oferta";
         $client = new Client();
         $response = $client->post($url, [
@@ -40,9 +40,9 @@ class OpportunitiesController extends Controller
                 'Content-Type' => 'application/json'
             ],
             'body' => json_encode([
-                'cpf'=> $request->cpf,
-                'instituicao_id'=> $request->instituicao_id,
-                'codModalidade'=> $request->codModalidade,
+                'cpf'=> $cpf,
+                'instituicao_id'=> $instituicao_id,
+                'codModalidade'=> $codModalidade,
 
             ])
         ]);
@@ -51,8 +51,27 @@ class OpportunitiesController extends Controller
         $body = $response->getBody();
 
         return  $body;
+    }
+    public function getOffer($cpf , $instituicao_id , $codModalidade)
+    {
+        $url = "https://dev.gosat.org/api/v1/simulacao/oferta";
+        $client = new Client();
+        $response = $client->post($url, [
+            'headers' => [
+                'Content-Type' => 'application/json'
+            ],
+            'body' => json_encode([
+                'cpf'=> $cpf,
+                'instituicao_id'=> $instituicao_id,
+                'codModalidade'=> $codModalidade,
 
+            ])
+        ]);
 
+        $statusCode = $response->getStatusCode();
+        $body = $response->getBody();
+
+        return  $body;
     }
 
     /**

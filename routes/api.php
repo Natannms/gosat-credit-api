@@ -23,7 +23,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 //Credit Routes
 Route::get('/opportunities/{cpf}', [OpportunitiesController::class, 'getOpportunities']);
-Route::get('/offer', [OpportunitiesController::class, 'getOffer']);
+Route::get('/offer/{cpf}/{instituicao_id}/{codModalidade}', [OpportunitiesController::class, 'getOffer']);
 
 
 //Authentication
