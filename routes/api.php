@@ -24,7 +24,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 //Credit Routes
 Route::get('/opportunities/{cpf}', [OpportunitiesController::class, 'getOpportunities']);
 Route::get('/offer/{cpf}/{instituicao_id}/{codModalidade}', [OpportunitiesController::class, 'getOffer']);
-
+Route::post('/hire', [OpportunitiesController::class, 'hireLoan']);
 
 //Authentication
 Route::post('/register', [AuthController::class, 'store']);
