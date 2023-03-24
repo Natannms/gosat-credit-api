@@ -27,8 +27,7 @@ class OpportunitiesController extends Controller
                     'cpf' => $cpf
                 ])
             ]);
-
-            return $body = $response->getBody();
+            return json_decode($response->getBody())->instituicoes;
         } catch (\Throwable $th) {
             return response()->json([
                 'message' => 'CPF não encontrado',
