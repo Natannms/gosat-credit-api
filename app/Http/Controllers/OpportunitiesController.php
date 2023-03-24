@@ -23,7 +23,7 @@ class OpportunitiesController extends Controller
     {
         if (!$this->is_between($request->hire_value, $request->offer_value_max, $request->offer_value_min)) {
             return response()->json([
-                'message' => 'O valor '.$request->hire_value.' solicitado não está entre '.$request->offer_value_min.' e '.$request->offer_value_max,
+                'message' => 'O valor ' . $request->hire_value . ' solicitado não está entre ' . $request->offer_value_min . ' e ' . $request->offer_value_max,
             ]);
         }
 
@@ -92,21 +92,26 @@ class OpportunitiesController extends Controller
      */
     public function getOpportunities($cpf)
     {
-        $url = "https://dev.gosat.org/api/v1/simulacao/credito";
-        $client = new Client();
-        $response = $client->post($url, [
-            'headers' => [
-                'Content-Type' => 'application/json'
-            ],
-            'body' => json_encode([
-                'cpf' => $cpf
-            ])
-        ]);
+        try {
+            $url = "https://dev.gosat.org/api/v1/simulacao/credito";
+            $client = new Client();
+            $response = $client->post($url, [
+                'headers' => [
+                    'Content-Type' => 'application/json'
+                ],
+                'body' => json_encode([
+                    'cpf' => $cpf
+                ])
+            ]);
 
-        $statusCode = $response->getStatusCode();
-        $body = $response->getBody();
+            return $body = $response->getBody();
 
-        return  $body;
+        } catch (\Throwable $th) {
+            return response()->json([
+                'message' => 'CPF não encontrado',
+                'error' => $th->getMessage()
+            ]);
+        }
     }
 
     public function getOneOffer($cpf, $instituicao_id, $codModalidade)
