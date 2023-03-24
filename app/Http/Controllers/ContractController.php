@@ -36,10 +36,10 @@ class ContractController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function create($user_id, Contract $contract)
+    public function create($user_id, Contract $Contract)
     {
-         $contract->save();
-         if(!$contract){
+         $Contract->save();
+         if(!$Contract){
             return false;
         }
 
@@ -49,22 +49,29 @@ class ContractController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\contract  $contract
+     * @param  \App\Models\Contract  $Contract
      * @return \Illuminate\Http\Response
      */
-    public function show(contract $contract)
+    public function show(Contract $Contract, $id)
     {
-        //
+        $contract =  Contract::find($id);
+        if($contract){
+            return response()->json($contract);
+        }else{
+            return response()->json([
+                'message' => 'Contrato não encontrado'
+            ]);
+        }
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\contract  $contract
+     * @param  \App\Models\Contract  $Contract
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, contract $contract)
+    public function update(Request $request, Contract $Contract)
     {
         //
     }
@@ -72,10 +79,10 @@ class ContractController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\contract  $contract
+     * @param  \App\Models\Contract  $Contract
      * @return \Illuminate\Http\Response
      */
-    public function destroy(contract $contract)
+    public function destroy(Contract $Contract)
     {
         //
     }
