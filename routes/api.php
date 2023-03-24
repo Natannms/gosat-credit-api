@@ -27,10 +27,11 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 //Credit Routes
 Route::get('/opportunities/{cpf}', [OpportunitiesController::class, 'getOpportunities']);
-Route::get('/offer/{cpf}', [OfferController::class, 'offer']);
+Route::get('/offers/{cpf}', [OfferController::class, 'offer']);
 
 Route::post('/contract', [LoanController::class, 'store']);
 Route::get('/contract/{id}', [ContractController::class, 'show']);
+
 Route::post('/role', [RoleController::class, 'store']);
 Route::get('/role/{id}', [RoleController::class, 'show']);
 
