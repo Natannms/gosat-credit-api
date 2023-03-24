@@ -23,7 +23,7 @@ class OpportunitiesController extends Controller
     {
         if (!$this->is_between($request->hire_value, $request->offer_value_max, $request->offer_value_min)) {
             return response()->json([
-                'message' => 'value solicitado não está dentro do range ofertado',
+                'message' => 'O valor '.$request->hire_value.' solicitado não está entre '.$request->offer_value_min.' e '.$request->offer_value_max,
             ]);
         }
 
