@@ -44,7 +44,7 @@ class AuthController extends Controller
      */
     public function store(Request $request , User $user)
     {
-        $userData = $request->only('name', 'email', 'password');
+        $userData = $request->only('name', 'email', 'password', 'document');
         $userData['password'] =  bcrypt($userData['password']);
         if(!$user = $user->create($userData)){
             abort(500, "Error to create a new user");
