@@ -5,6 +5,7 @@ use App\Http\Controllers\ContractController;
 use App\Http\Controllers\LoanController;
 use App\Http\Controllers\OfferController;
 use App\Http\Controllers\OpportunitiesController;
+use App\Http\Controllers\RoleController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -29,6 +30,8 @@ Route::get('/opportunities/{cpf}', [OpportunitiesController::class, 'getOpportun
 Route::get('/offer/{cpf}/{instituicao_id}/{codModalidade}', [OfferController::class, 'show']);
 Route::post('/contract', [LoanController::class, 'store']);
 Route::get('/contract/{id}', [ContractController::class, 'show']);
+Route::post('/role', [RoleController::class, 'store']);
+Route::get('/role/{id}', [RoleController::class, 'show']);
 
 //Authentication
 Route::post('/register', [AuthController::class, 'store']);
