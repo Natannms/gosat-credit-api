@@ -24,4 +24,52 @@ class Services
         return 'isValid';
     }
 
+   static public function loweInterest($list)
+    {
+         // reorder where jursMes is less
+        usort($list, function ($a, $b) {
+            return $a['offer']['jurosMes'] <=> $b['offer']['jurosMes'];
+        });
+
+        return $list;
+    }
+
+    static public function highestRedeemedValue($list){
+        // reorder where jursMes is less
+        usort($list, function ($a, $b) {
+            return $b['offer']['valorMax'] <=> $a['offer']['valorMax'];
+        });
+
+        return $list;
+    }
+
+    static public function lowestRedeemedValue($lis){
+        // reorder where jursMes is less
+        usort($list, function ($a, $b) {
+            return $a['offer']['valorMax'] <=> $b['offer']['valorMax'];
+        });
+
+        return $list;
+    }
+
+    static public function greaterNumberOfInstallments($list)
+    {
+        // reorder where jursMes is less
+        usort($list, function ($a, $b) {
+            return $b['offer']['QntParcelaMax'] <=> $a['offer']['QntParcelaMax'];
+        });
+
+        return $list;
+    }
+
+    static public function smallerAmountOfInstallments($list)
+    {
+        // reorder where jursMes is less
+        usort($list, function ($a, $b) {
+            return $a['offer']['QntParcelaMin'] <=> $b['offer']['QntParcelaMin'];
+        });
+
+        return $list;
+    }
+
 }
