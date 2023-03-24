@@ -28,7 +28,7 @@ class User extends Authenticatable
         'name' => 'required',
         'email' => 'required|unique:users',
         'password' => 'required',
-        'document'=>'required|unique:users|min:5|max:14'
+        'document'=>'required|unique:users'
     );
 
     private $errors;
