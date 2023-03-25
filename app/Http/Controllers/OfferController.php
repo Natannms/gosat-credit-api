@@ -40,12 +40,12 @@ class OfferController extends Controller
         }
     }
 
-    public function offer(Request $request, $cpf)
+    public function offer(Request $request)
     {
         $offers = $request->offers;
         $list = [];
         foreach ($offers as $key => $item) {
-            $valuesOffer = $this->getOfferValues($item['instituicao_id'], $item['codModalidade'], $cpf);
+            $valuesOffer = $this->getOfferValues($item['instituicao_id'], $item['codModalidade'], $request->cpf);
             $list[] =  [
                 "instituicao_id" => $item['instituicao_id'],
                 "codModalidade" => $item['codModalidade'],
