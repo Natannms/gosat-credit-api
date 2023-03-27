@@ -26,9 +26,42 @@ class ContractController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, Contract $contract)
     {
-        //
+        if(!$contract->validate($request->all())){
+            return response()->json([
+                'statusCode'=> 400,
+                'message' => 'Contrato não pode ser criado',
+                'errors' => $contract-> errors()
+            ],400);
+        }
+
+        $contract->instituicao = $request->instituicao;
+        $contract->instituicao_id = $request->instituicao_id;
+        $contract->codModalidade = $request->codModalidade;
+        $contract->user_id = $request->user_id;
+        $contract->offer_qnt_installments_max = $request->offer_qnt_installments_max;
+        $contract->offer_qnt_installments_min = $request->offer_qnt_installments_min;
+        $contract->offer_juros_mes = $request->offer_juros_mes;
+        $contract->offer_value_max = $request->offer_value_max;
+        $contract->offer_value_min = $request->offer_value_min;
+        $contract->hire_value = $request->hire_value;
+        $contract->hire_qnt_installments = $request->hire_qnt_installments;
+        $contract->save();
+
+        if(!$contract){
+            return response()->json([
+                'statusCode'=> 500,
+                'message' => 'Contrato não pode ser criado',
+            ], 500);
+        }
+
+        return response()->json([
+            'statusCode'=> 200,
+            'message' => 'Contrato criado com sucesso',
+            'data' => $contract
+        ], 200);
+
     }
     /**
      * Create a newly created resource in storage.

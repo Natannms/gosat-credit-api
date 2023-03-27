@@ -6,6 +6,7 @@ use App\Http\Controllers\LoanController;
 use App\Http\Controllers\OfferController;
 use App\Http\Controllers\OpportunitiesController;
 use App\Http\Controllers\RoleController;
+use App\Models\Contract;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -29,7 +30,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::get('/opportunities/{cpf}', [OpportunitiesController::class, 'getOpportunities']);
 Route::post('/offers', [OfferController::class, 'offer']);
 
-Route::post('/contract', [LoanController::class, 'store']);
+Route::post('/contract', [ContractController::class, 'store']);
 Route::get('/contract/{id}', [ContractController::class, 'show']);
 
 Route::post('/role', [RoleController::class, 'store']);

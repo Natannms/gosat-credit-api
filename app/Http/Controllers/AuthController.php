@@ -16,14 +16,23 @@ class AuthController extends Controller
     {
         $credentials = $request->only('email', 'password');
 
-        if(!auth()->attempt($credentials)){
-            abort(401, "Invalid credentials");
+        if (!auth()->attempt($credentials)) {
+            return repsonse()->json(
+                [
+                    'statusCode' => 401,
+                    'message' => 'Credenciais inválidas'
+                ],
+                401
+            );
         }
 
         $token =  auth()->user()->createToken('secret');
 
         return response()->json([
-            'token' => $token->plainTextToken
+            'statusCode' => 200,
+            'user'=> auth()->user(),
+            'token' => $token->plainTextToken,
+            'message' => 'Usuario logado'
         ], 200);
     }
     /**
@@ -42,15 +51,32 @@ class AuthController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request , User $user)
+    public function store(Request $request, User $user)
     {
-        $userData = $request->only('name', 'email', 'password', 'document');
-        $userData['password'] =  bcrypt($userData['password']);
-        if(!$user = $user->create($userData)){
-            abort(500, "Error to create a new user");
+        $user = new User();
+        if (!$user->validate($request->all())) {
+            return response()->json([
+                'statusCode' => 400,
+                'message' => 'Verifique os campos não preenchidos adequadamente.',
+                'user' => $user->errors()
+            ], 400);
         }
 
-        return response()->json($user, 201);
+        $userData = $request->only('name', 'email', 'password', 'document');
+        $userData['password'] =  bcrypt($userData['password']);
+        if (!$user = $user->create($userData)) {
+            return response()->json([
+                'statusCode' => 500,
+                'message' => "Erro interno. Não foi possivel crar um novo usuario",
+                'user' => $user->errors()
+            ], 500);
+        }
+
+        return response()->json([
+            'statusCode' => 201,
+            'message' => "Usuario criado com sucesso",
+            'user' => $user
+        ], 201);
     }
 
     /**

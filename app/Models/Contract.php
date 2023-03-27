@@ -38,6 +38,7 @@ class Contract extends Model
             'offer_value_min' => 'required',
             'hire_value' => 'required',
             'hire_qnt_installments' => 'required',
+            'user_id' => 'required|exists:users,id'
         ]);
 
         if ($validator->fails()) {

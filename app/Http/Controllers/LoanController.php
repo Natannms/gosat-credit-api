@@ -17,24 +17,10 @@ class LoanController extends Controller
 
         if($isBetween != 'isValid'){
             return response()->json([
+                'statusCode'=> 400,
                 'message' => $isBetween,
-            ]);
+            ], 400);
         }
-
-        //create a user
-        $user = new User();
-        if (!$user->validate($request->all())) {
-            return response()->json([
-                'message' => 'User data is not valid',
-                'user' => $user->errors()
-            ]);
-        }
-
-        $user->name = $request->name;
-        $user->email = $request->email;
-        $user->password = $request->password;
-        $user->document = $request->document;
-        $user->save();
 
         // //create a contract
 
@@ -43,15 +29,16 @@ class LoanController extends Controller
 
         if (!$contract->validate($request->all())) {
             return response()->json([
+                'statusCode'=> 400,
                 'message' => 'Informações de contrato.',
                 'contract' => $contract->errors()
-            ]);
+            ], 400);
         }
 
         $contract->instituicao = $request->instituicao;
         $contract->instituicao_id = $request->instituicao_id;
         $contract->codModalidade = $request->codModalidade;
-        $contract->user_id = $user->id;
+        $contract->user_id =$request->user_id;
         $contract->offer_qnt_installments_max = $request->offer_qnt_installments_max;
         $contract->offer_qnt_installments_min = $request->offer_qnt_installments_min;
         $contract->offer_juros_mes = $request->offer_juros_mes;
@@ -63,20 +50,21 @@ class LoanController extends Controller
 
         //store a contract
         $contractController =  new ContractController();
-        $storeContract = $contractController->create($user->id, $contract);
+        $storeContract = $contractController->create($request->user_id, $contract);
 
 
         if (!$storeContract) {
-            $user->delete();
             return response()->json([
+                'statusCode'=> 500,
                 'message' => 'Contrato não pode ser criado por um erro interno',
-            ]);
+            ], 500);
         }
 
         return response()->json([
+            'statusCode'=> 200,
             'message' => 'Contrato criado com sucesso',
             'user' => $user,
             'contract' => $contract
-        ]);
+        ], 200);
     }
 }
