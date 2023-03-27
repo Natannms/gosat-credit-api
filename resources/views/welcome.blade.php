@@ -15,7 +15,7 @@
 <p>O link para o repositório do projeto é: <a href="https://github.com/Natannms/gosat-credit-api">https://github.com/Natannms/gosat-credit-api</a></p>
 <h3 id="postman">Postman</h3>
 <p>Para testar a API, segue abaixo o link da coleção no Postman:</p>
-<p><a href="https://grey-crater-952762.postman.co/workspace/Team-Workspace~e80cbc08-aa6a-4412-8464-4b2940dd4d52/collection/10562286-dc2bce05-f3f4-4f93-ba5d-f1bfd539ebc0?action=share&amp;creator=10562286">https://grey-crater-952762.postman.co/workspace/Team-Workspace~e80cbc08-aa6a-4412-8464-4b2940dd4d52/collection/10562286-dc2bce05-f3f4-4f93-ba5d-f1bfd539ebc0?action=share&amp;creator=10562286</a></p>
+<p><a href="https://grey-crater-952762.postman.co/workspace/Team-Workspace~e80cbc08-aa6a-4412-8464-4b2940dd4d52/collection/10562286-dc2bce05-f3f4-4f93-ba5d-f1bfd539ebc0?action=share&creator=10562286">https://grey-crater-952762.postman.co/workspace/Team-Workspace~e80cbc08-aa6a-4412-8464-4b2940dd4d52/collection/10562286-dc2bce05-f3f4-4f93-ba5d-f1bfd539ebc0?action=share&creator=10562286</a></p>
 <h2 id="frontend">Frontend</h2>
 <p>Para rodar o frontend deste projeto, é necessário ter instalado o React, o NodeJs e o gerenciador de pacotes NPM ou Yarn. Além disso, é necessário utilizar um navegador para rodar a aplicação (sugestão de uso do Google Chrome ou Firefox).</p>
 <p>O link para o repositório do projeto é: <a href="https://github.com/Natannms/gosat-credit-react">https://github.com/Natannms/gosat-credit-react</a></p>
